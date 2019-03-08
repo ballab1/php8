@@ -1,4 +1,4 @@
 upstream fcgiwrap {
     # Upstream to abstract back-end connection(s) for fcgiwrap
-    server unix:/var/run/php/fcgiwrap.sock;
+    server unix:/run/php/fcgiwrap.sock;
 }
