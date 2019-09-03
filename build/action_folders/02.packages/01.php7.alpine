@@ -21,6 +21,7 @@ declare -a PKGS=( curl
                   php7-posix
                   php7-session
                   php7-sockets
+                  php7-tidy
                   php7-xdebug
                   php7-xml
                   php7-xmlreader
