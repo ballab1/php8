@@ -1,4 +1,4 @@
-ARG FROM_BASE=${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/nginx-base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
+ARG FROM_BASE=${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/nginx-base/${NGINX_VERSION:-1.16.1}:${BASE_TAG:-latest}
 FROM $FROM_BASE
 
 # name and version of this docker image
@@ -14,7 +14,7 @@ COPY build Dockerfile /tmp/
 ENV DEBUG_TRACE=0
 
 # php version being bundled in this docker image
-ARG PHP7_VERSION=7.2.8-r1
+ARG PHP7_VERSION=7.2.22-r0
 LABEL version.php=$PHP7_VERSION
 
 
