@@ -1,10 +1,12 @@
 # php7 Packages
 
 declare -a PKGS=( curl
+                  php7
                   php7-bz2
                   php7-ctype
                   php7-cgi
                   php7-common
+                  php7-dev
                   php7-dom
                   php7-curl
                   php7-fpm
