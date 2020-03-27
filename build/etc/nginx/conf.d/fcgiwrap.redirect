@@ -1,4 +1,8 @@
 location ~ \.cgi(.*)$ {
+    try_files $uri @cgi;
+}
+
+location @cgi {
     root /usr/local/cgi;
     rewrite ^/cgi-bin/(.*)$ /$1;
     include fastcgi_params;
