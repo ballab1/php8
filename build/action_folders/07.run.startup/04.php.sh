@@ -60,7 +60,7 @@ if [ "${PHP_LOGGING:-}" ];then
 
     fi
 
-    cfgFile='/etc/php5/php-fpm.conf'
+    cfgFile='/etc/php7/php-fpm.conf'
     term.log "    updating '${cfgFile}' with provided 'LOG_LEVEL'"'\n' 'white'
 
     if [ "$PHP_LOGGING" = 0 ]; then
