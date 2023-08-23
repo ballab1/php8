@@ -1,0 +1,33 @@
+# php82 Packages
+
+declare -a PKGS=( curl
+                  php82
+                  php82-bz2
+                  php82-ctype
+                  php82-cgi
+                  php82-common
+                  php82-dev
+                  php82-dom
+                  php82-curl
+                  php82-fpm
+                  php82-gd
+                  php82-gettext
+                  php82-iconv
+                  php82-json
+                  php82-mbstring
+                  php82-mysqli
+                  php82-opcache
+                  php82-openssl
+                  php82-pear
+                  php82-phar
+                  php82-posix
+                  php82-session
+                  php82-simplexml
+                  php82-sockets
+                  php82-tidy
+                  php82-xdebug
+                  php82-xml
+                  php82-xmlreader
+#                  php82-xmlrpc
+                  php82-zip
+                 )

@@ -11,13 +11,13 @@ sed -i -e "s|^.*date.timezone\s*=.*$|date.timezone = ${TZ}|" \
 
 declare cnfFile="/etc/${PHP}/php-fpm.conf"
 term.log "    updating '$cnfFile' with 'chdir = ${WWW}'\n" 'white'
-sed -i -e "s|^listen\s*=.*$|listen=${RUN_DIR}/php-fpm.sock|"  \
+sed -i -e "s|^listen\s*=.*$|listen=${RUN_DIR}/php-fpm82.sock|"  \
        -e "s|^.*user\s*=.*$|user = ${WWW_USER}|" \
        -e "s|^.*group\s*=.*$|group = ${WWW_GROUP}|" \
        -e "s|^.*chdir\s*=.*$|chdir = ${WWW}|" \
           "$cnfFile"
 
-sed -i "s|^\s*server\s+.*$|    server unix:${RUN_DIR}/php-fpm.sock;|"  /etc/nginx/conf.d/php_fpm.upstream
+sed -i "s|^\s*server\s+.*$|    server unix:${RUN_DIR}/php-fpm82.sock;|"  /etc/nginx/conf.d/php_fpm82.upstream
 
 # move the phpinfo.php to new WWW folder so we can access it
 if [ "$WWW" != /var/www ] && [ -d /var/www/phpinfo ]; then
@@ -38,7 +38,7 @@ if [ -f /var/log/.nginx.debug ] &&  [ -e "$cnfFile" ] ; then
 fi
 
 if [ "${PHP_LOGGING:-}" ];then
-    declare cfgFile='/etc/php7/php.ini'
+    declare cfgFile='/etc/php82/php.ini'
     term.log "    updating '${cfgFile}' with provided 'LOG_LEVEL'"'\n' 'white'
 
     if [ "$PHP_LOGGING" = 0 ]; then
@@ -60,7 +60,7 @@ if [ "${PHP_LOGGING:-}" ];then
 
     fi
 
-    cfgFile='/etc/php7/php-fpm.conf'
+    cfgFile='/etc/php82/php-fpm.conf'
     term.log "    updating '${cfgFile}' with provided 'LOG_LEVEL'"'\n' 'white'
 
     if [ "$PHP_LOGGING" = 0 ]; then
@@ -69,9 +69,9 @@ if [ "${PHP_LOGGING:-}" ];then
                      "$cfgFile"
     else
         sed -i -E -e "s|^(log_level\s*=\s*).*$|\1debug|" \
-                  -e "s|^;?(access.log\s*=\s*).*$|\1/var/log/php-fpm.access.log|" \
+                  -e "s|^;?(access.log\s*=\s*).*$|\1/var/log/php-fpm82.access.log|" \
                      "$cfgFile"
-        touch /var/log/php-fpm.access.log
+        touch /var/log/php-fpm82.access.log
     fi
 fi
 

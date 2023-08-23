@@ -2,7 +2,7 @@ ARG FROM_BASE=${DOCKER_REGISTRY:-s2.ubuntu.home:5000/}${CONTAINER_OS:-alpine}/ng
 FROM $FROM_BASE
 
 # name and version of this docker image
-ARG CONTAINER_NAME=php7
+ARG CONTAINER_NAME=php82
 # Specify CBF version to use with our configuration and customizations
 ARG CBF_VERSION
 
@@ -14,8 +14,8 @@ COPY build Dockerfile /tmp/
 ENV DEBUG_TRACE=0
 
 # php version being bundled in this docker image
-ARG PHP7_VERSION=7.4.19-r0
-LABEL version.php=$PHP7_VERSION
+ARG PHP8_VERSION=8.2.7-r0
+LABEL version.php=$PHP8_VERSION
 
 
 # build content
@@ -27,4 +27,4 @@ RUN set -o verbose \
 
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 #CMD ["$CONTAINER_NAME"]
-CMD ["php7"]
+CMD ["php82"]
