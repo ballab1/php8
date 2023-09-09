@@ -11,13 +11,25 @@ sed -i -e "s|^.*date.timezone\s*=.*$|date.timezone = ${TZ}|" \
 
 declare cnfFile="/etc/${PHP}/php-fpm.conf"
 term.log "    updating '$cnfFile' with 'chdir = ${WWW}'\n" 'white'
-sed -i -e "s|^listen\s*=.*$|listen=${RUN_DIR}/php-fpm82.sock|"  \
+sed -i -e "s|^listen\s*=.*$|listen=${RUN_DIR}/php-fpm.sock|"  \
        -e "s|^.*user\s*=.*$|user = ${WWW_USER}|" \
        -e "s|^.*group\s*=.*$|group = ${WWW_GROUP}|" \
        -e "s|^.*chdir\s*=.*$|chdir = ${WWW}|" \
+       -e "s|^.*error_log\s*=.*$|error_log = /var/log/php82-fpm.log|" \
           "$cnfFile"
 
-sed -i "s|^\s*server\s+.*$|    server unix:${RUN_DIR}/php-fpm82.sock;|"  /etc/nginx/conf.d/php_fpm82.upstream
+cnfFile="/etc/supervisor.d/php-fpm.ini"
+term.log "    updating '$cnfFile' with 'chdir = ${WWW}'\n" 'white'
+sed -i -e "s|^stdout_logfile\s*=.*$|stdout_logfile=/var/log/php82-fpm.log|"  \
+          "$cnfFile"
+
+cnfFile="/etc/supervisord/fcgiwrap.ini"
+term.log "    updating '$cnfFile' with 'server = socket=unix:${RUN_DIR}/fcgiwrap.sock'\n" 'white'
+sed -i -e "s|^server\s*=\s*unix:.*$|server=unix:${RUN_DIR}/fcgiwrap.sock|"  \
+          "$cnfFile"
+
+
+sed -i "s|^\s*server\s+.*$|    server unix:${RUN_DIR}/php-fpm.sock;|"  /etc/nginx/conf.d/php_fpm.upstream
 
 # move the phpinfo.php to new WWW folder so we can access it
 if [ "$WWW" != /var/www ] && [ -d /var/www/phpinfo ]; then
